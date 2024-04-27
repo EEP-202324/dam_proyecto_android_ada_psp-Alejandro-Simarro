@@ -17,7 +17,7 @@ class DronesJsonTest {
     private JacksonTester<Drones> json;
 
     @Test
-    void estudiantesSerializationTest() throws IOException {
+    void DronesSerializationTest() throws IOException {
         Drones Drones = new Drones (1,"Paco", "Gonzalez", "HOVERAir X1");
         assertThat(json.write(Drones)).isStrictlyEqualToJson("expected.json");
 
@@ -39,7 +39,7 @@ class DronesJsonTest {
        
     }
     @Test
-    void internsDeserializationTest() throws IOException {
+    void DronesDeserializationTest() throws IOException {
        String expected = """
                {
                    "id":2,

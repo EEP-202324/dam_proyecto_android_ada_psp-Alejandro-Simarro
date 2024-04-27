@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Drones")
 class DronesController {
-
 	@GetMapping("/{requestedId}")
 	private ResponseEntity<Drones> findById(@PathVariable Long requestedId) {
 		 if (requestedId.equals(2L)) {
