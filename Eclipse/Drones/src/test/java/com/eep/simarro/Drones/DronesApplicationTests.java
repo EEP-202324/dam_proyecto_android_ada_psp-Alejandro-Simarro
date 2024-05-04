@@ -23,18 +23,19 @@ class DronesdApplicationTests {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
+
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         Number id = documentContext.read("$.id");
-        assertThat(id).isNotNull();
+        assertThat(id).isEqualTo(2);
         
         String name = documentContext.read("$.name");
-        assertThat(name).isNotNull();
+        assertThat(name).isEqualTo("Paco");
         
         String apellido = documentContext.read("$.apellido");
-        assertThat(apellido).isNotNull();
+        assertThat(apellido).isEqualTo("Gonzalez");
         
         String DE = documentContext.read("$.DE");
-        assertThat(DE).isNotNull();
+        assertThat(DE).isEqualTo("HOVERAir X1");
         
     }
     @Test

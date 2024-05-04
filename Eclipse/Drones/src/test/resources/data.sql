@@ -1,1 +1,1 @@
-INSERT INTO DRONES(ID, NAME, APELLIDOS, DE) VALUES (1,"Paco", "Gonzalez", "HOVERAir X1");
+INSERT INTO Drones(ID, NAME, APELLIDO, DE) VALUES (2, 'Paco', 'Gonzalez', 'HOVERAir X1');
