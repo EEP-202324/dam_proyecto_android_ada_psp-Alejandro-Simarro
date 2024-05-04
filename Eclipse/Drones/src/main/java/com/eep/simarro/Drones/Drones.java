@@ -1,5 +1,7 @@
 package com.eep.simarro.Drones;
 
-record Drones(int id, String name, String apellido, String DE) {
+import org.springframework.data.annotation.Id;
+
+record Drones(@Id int id, String name, String apellido, String DE) {
 	
 }
