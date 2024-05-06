@@ -54,6 +54,21 @@ class DronesdApplicationTests {
        URI locationOfNewDrones = createResponse.getHeaders().getLocation();
        ResponseEntity<String> getResponse = restTemplate.getForEntity(locationOfNewDrones, String.class);
        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+       assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+    DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+    Number id = documentContext.read("$.id");
+    assertThat(id).isEqualTo(2);
+    
+    String name = documentContext.read("$.name");
+    assertThat(name).isEqualTo("Paco");
+    
+    String apellido = documentContext.read("$.apellido");
+    assertThat(apellido).isEqualTo("Gonzalez");
+    
+    String DE = documentContext.read("$.DE");
+    assertThat(DE).isEqualTo("HOVERAir X1");
+    
     }
     
 }
