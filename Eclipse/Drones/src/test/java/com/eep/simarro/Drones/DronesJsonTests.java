@@ -1,5 +1,7 @@
 package com.eep.simarro.Drones;
 
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -15,29 +17,44 @@ class DronesJsonTest {
 
     @Autowired
     private JacksonTester<Drones> json;
+    @Autowired
+    private JacksonTester<Drones[]> jsonlist;
 
+    private Drones[] Drones;
+
+    @BeforeEach
+    void setUp() {
+        Drones = Arrays.array(
+                new Drones(1,"Paco", "Gonzalez", "HOVERAir X1"),
+                new Drones(2,"Mario", "Garcia", "H4DRC F11 PRO"),
+                new Drones(3,"Carlos", "Lopez", "CASC CH-92"));
+    }
     @Test
     void DronesSerializationTest() throws IOException {
-        Drones Drones = new Drones (1,"Paco", "Gonzalez", "HOVERAir X1");
-        assertThat(json.write(Drones)).isStrictlyEqualToJson("expected.json");
+        Drones Dron = new Drones (1,"Paco", "Gonzalez", "HOVERAir X1");
+        assertThat(json.write(Dron)).isStrictlyEqualToJson("expected.json");
 
-        assertThat(json.write(Drones)).hasJsonPathNumberValue("@.id");
-        assertThat(json.write(Drones)).extractingJsonPathNumberValue("@.id")
+        assertThat(json.write(Dron)).hasJsonPathNumberValue("@.id");
+        assertThat(json.write(Dron)).extractingJsonPathNumberValue("@.id")
             .isEqualTo(1);
 
-        assertThat(json.write(Drones)).hasJsonPathStringValue("@.name");
-        assertThat(json.write(Drones)).extractingJsonPathStringValue("@.name")
+        assertThat(json.write(Dron)).hasJsonPathStringValue("@.name");
+        assertThat(json.write(Dron)).extractingJsonPathStringValue("@.name")
             .isEqualTo("Paco");
 
-        assertThat(json.write(Drones)).hasJsonPathStringValue("@.apellido");
-        assertThat(json.write(Drones)).extractingJsonPathStringValue("@.apellido")
+        assertThat(json.write(Dron)).hasJsonPathStringValue("@.apellido");
+        assertThat(json.write(Dron)).extractingJsonPathStringValue("@.apellido")
             .isEqualTo("Gonzalez");
 
-        assertThat(json.write(Drones)).hasJsonPathStringValue("@.DE");
-        assertThat(json.write(Drones)).extractingJsonPathStringValue("@.DE")
+        assertThat(json.write(Dron)).hasJsonPathStringValue("@.DE");
+        assertThat(json.write(Dron)).extractingJsonPathStringValue("@.DE")
              .isEqualTo("HOVERAir X1");
-       
     }
+    
+    void ListDeserializationTest() throws IOException {
+    	 assertThat(jsonlist.write(Drones)).isStrictlyEqualToJson("list.json");
+    }
+    
     @Test
     void DronesDeserializationTest() throws IOException {
        String expected = """
@@ -55,4 +72,5 @@ class DronesJsonTest {
        assertThat(json.parseObject(expected).apellido()).isEqualTo("Garcia");
        assertThat(json.parseObject(expected).DE()).isEqualTo("4DRC F11 PRO");
     }
+    
 }

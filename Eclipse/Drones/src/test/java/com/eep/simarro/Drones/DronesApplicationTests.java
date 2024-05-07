@@ -19,14 +19,14 @@ class DronesdApplicationTests {
 
     @Test
     void shouldReturnADronesWhenDataIsSaved() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/Drones/2", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/Drones/1", String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         Number id = documentContext.read("$.id");
-        assertThat(id).isEqualTo(2);
+        assertThat(id).isEqualTo(1);
         
         String name = documentContext.read("$.name");
         assertThat(name).isEqualTo("Paco");
