@@ -45,6 +45,4 @@ class DronesController {
 	            .toUri();
 	   return ResponseEntity.created(locationOfNewDrones).build();
 	}
-	
-	
 }
