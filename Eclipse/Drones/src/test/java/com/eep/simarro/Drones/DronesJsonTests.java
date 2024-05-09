@@ -50,7 +50,7 @@ class DronesJsonTest {
         assertThat(json.write(Dron)).extractingJsonPathStringValue("@.DE")
              .isEqualTo("HOVERAir X1");
     }
-    
+    @Test
     void ListDeserializationTest() throws IOException {
     	 assertThat(jsonlist.write(Drones)).isStrictlyEqualToJson("list.json");
     }
@@ -71,6 +71,17 @@ class DronesJsonTest {
        assertThat(json.parseObject(expected).name()).isEqualTo("Mario");
        assertThat(json.parseObject(expected).apellido()).isEqualTo("Garcia");
        assertThat(json.parseObject(expected).DE()).isEqualTo("4DRC F11 PRO");
+    }
+    @Test
+    void internsListDeserializationTest() throws IOException {
+        String expected="""
+                [
+                    { "id":1, "name":"Paco", "apellido":"Gonzalez", "DE":"HOVERAir X1" },
+                    { "id":2, "name":"Mario", "apellido":"Garcia", "DE":"H4DRC F11 PRO" },
+                    { "id":3, "name":"Carlos", "apellido":"Lopez", "DE":"CASC CH-92" }
+                ]
+                 """;
+           assertThat(jsonlist.parse(expected)).isEqualTo(Drones);
     }
     
 }

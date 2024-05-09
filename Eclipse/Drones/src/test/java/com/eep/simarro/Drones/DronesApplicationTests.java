@@ -48,16 +48,18 @@ class DronesdApplicationTests {
 
       assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
       assertThat(response.getBody()).isBlank();
+      
     }
     @Test
     @DirtiesContext
     void shouldCreateANewDron() {
        Drones newDrones = new Drones(2,"Paco","Gonzalez","HOVERAir X1");  
        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/Drones", newDrones, Void.class);
+       assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
        URI locationOfNewDrones = createResponse.getHeaders().getLocation();
        ResponseEntity<String> getResponse = restTemplate.getForEntity(locationOfNewDrones, String.class);
        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-       assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+      
 
     DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
     Number id = documentContext.read("$.id");
@@ -79,8 +81,8 @@ class DronesdApplicationTests {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
-        int DronesCount = documentContext.read("$.length()");
-        assertThat(DronesCount).isEqualTo(3);
+        int dronesCount = documentContext.read("$.length()");
+        assertThat(dronesCount).isEqualTo(3);
 
         JSONArray id = documentContext.read("$..id");
         assertThat(id).containsExactlyInAnyOrder(1, 2, 3);
