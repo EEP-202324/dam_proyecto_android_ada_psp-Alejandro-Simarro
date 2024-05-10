@@ -144,24 +144,24 @@ class DronesdApplicationTests {
     @DirtiesContext
     void shouldUpdateAnExistingDrones() {
         // Define los valores de ejemplo para la actualización
-        Drones dronesUpdate = new Drones(99, "nombre", "apellido", "DE");
+        Drones dronesUpdate = new Drones(1, "Paco", "Gonzalez", "HOVERAir X1");
 
         // Realiza la solicitud PUT para actualizar el objeto Drones
         HttpEntity<Drones> request = new HttpEntity<>(dronesUpdate);
         ResponseEntity<Void> response = restTemplate
-                .exchange("/Drones/99", HttpMethod.PUT, request, Void.class);
+                .exchange("/Drones/1", HttpMethod.PUT, request, Void.class);
 
         // Verifica que la actualización fue exitosa
 
         // Verifica que los campos actualizados sean los esperados
         ResponseEntity<Drones> getResponse = restTemplate
-                .getForEntity("/Drones/99", Drones.class);
+                .getForEntity("/Drones/1", Drones.class);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Drones updatedDrones = getResponse.getBody();
-        assertThat(updatedDrones.id()).isEqualTo(99);
-        assertThat(updatedDrones.name()).isEqualTo("nombre");
-        assertThat(updatedDrones.apellido()).isEqualTo("apellido");
-        assertThat(updatedDrones.DE()).isEqualTo("DE");
+        assertThat(updatedDrones.id()).isEqualTo(1);
+        assertThat(updatedDrones.name()).isEqualTo("Paco");
+        assertThat(updatedDrones.apellido()).isEqualTo("Gonzalez");
+        assertThat(updatedDrones.DE()).isEqualTo("HOVERAir X1");
 
     }
     
