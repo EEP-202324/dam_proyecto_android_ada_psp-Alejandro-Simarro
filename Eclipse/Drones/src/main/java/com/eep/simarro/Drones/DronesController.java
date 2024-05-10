@@ -52,18 +52,4 @@ class DronesController {
 				pageable.getSortOr(Sort.by(Sort.Direction.ASC, "id"))));
 		return ResponseEntity.ok(page.getContent());
 	}
-
-	@PutMapping("/{requestedId}")
-	private ResponseEntity<Void> putDrones(@PathVariable int requestedId, @RequestBody Drones dronesUpdate, Principal principal) {
-		Drones drones = findDrones(requestedId, principal); 
-		if (drones != null) {
-		Drones updatedEstudiantes = new Drones(drones.id(), dronesUpdate.name(), drones.apellido(), drones.DE()); 
-		DronesRepository.save(updatedEstudiantes);      
-		return ResponseEntity.noContent().build(); 
-		}       
-		return ResponseEntity.notFound().build(); 
-	}
-	private Drones findDrones(int requestedId, Principal principal) {
-		
-	return DronesRepository.findByIdAndOwner(requestedId, principal.getName());     }
 }

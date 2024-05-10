@@ -140,26 +140,5 @@ class DronesdApplicationTests {
         JSONArray DE = documentContext.read("$..DE");
         assertThat(DE).containsExactlyInAnyOrder("HOVERAir X1","H4DRC F11 PRO","CASC CH-92");
     }
-    @Test
-    @DirtiesContext
-    void shouldUpdateAnExistingDrones() {
-        Drones dronesUpdate = new Drones(1, "Paco", "Gonzalez", "HOVERAir X1");
-        HttpEntity<Drones> request = new HttpEntity<>(dronesUpdate);
-        ResponseEntity<Void> response = restTemplate
-                .exchange("/drones/99", HttpMethod.PUT, request, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-
-        ResponseEntity<String> getResponse = restTemplate
-                .getForEntity("/drones/99", String.class);
-        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
-        Number id = documentContext.read("$..id");
-        String name = documentContext.read("$..name");
-        String apellido = documentContext.read("$..apellido");
-        String DE = documentContext.read("$..DE");
-        assertThat(id).isEqualTo(1);
-        assertThat(name).isEqualTo("Paco");
-        assertThat(apellido).isEqualTo("Gonzalez");
-        assertThat(DE).isEqualTo("HOVERAir X1");
-    }
+    
 }
