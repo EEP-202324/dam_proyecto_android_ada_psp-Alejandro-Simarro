@@ -41,7 +41,7 @@ class DronesController {
 	}
 
 	@PostMapping
-	private ResponseEntity<Void> createDrones(@RequestBody Drones newDronesRequest, UriComponentsBuilder ucb) {
+	public ResponseEntity<Void> createDrones(@RequestBody Drones newDronesRequest, UriComponentsBuilder ucb) {
 		Drones savedDrones = DronesRepository.save(newDronesRequest);
 		URI locationOfNewDrones = ucb.path("Drones/{id}").buildAndExpand(savedDrones.getId()).toUri();
 		return ResponseEntity.created(locationOfNewDrones).build();

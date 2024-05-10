@@ -1,9 +1,14 @@
 package com.eep.simarro.Drones;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Drones {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String apellido;
@@ -51,4 +56,3 @@ public class Drones {
         this.DE = DE;
     }
 }
-
