@@ -53,8 +53,9 @@ class DronesController {
 		return ResponseEntity.ok(page.getContent());
 	}
 	@PutMapping("/{requestedId}")
-	private ResponseEntity<Void> putDrones(@PathVariable Long requestedId, @RequestBody Drones dronesUpdate) {
-	    // just return 204 NO CONTENT for now.
+	private ResponseEntity<Void> putDrones(@PathVariable Integer requestedId, @RequestBody Drones dronesUpdate, Principal principal) {
+	    Drones updatedDrones = new Drones(requestedId, dronesUpdate.name(), dronesUpdate.apellido(), dronesUpdate.DE());
+	    DronesRepository.save(updatedDrones);
 	    return ResponseEntity.noContent().build();
 	}
 }
