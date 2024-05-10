@@ -158,10 +158,10 @@ class DronesdApplicationTests {
                 .getForEntity("/Drones/1", Drones.class);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Drones updatedDrones = getResponse.getBody();
-        assertThat(updatedDrones.id()).isEqualTo(1);
-        assertThat(updatedDrones.name()).isEqualTo("Paco");
-        assertThat(updatedDrones.apellido()).isEqualTo("Gonzalez");
-        assertThat(updatedDrones.DE()).isEqualTo("HOVERAir X1");
+        assertThat(updatedDrones.getId()).isEqualTo(1);
+        assertThat(updatedDrones.getName()).isEqualTo("Paco");
+        assertThat(updatedDrones.getApellido()).isEqualTo("Gonzalez");
+        assertThat(updatedDrones.getDE()).isEqualTo("HOVERAir X1");
 
     }
     

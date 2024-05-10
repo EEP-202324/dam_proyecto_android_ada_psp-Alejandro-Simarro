@@ -67,10 +67,10 @@ class DronesJsonTest {
                """;
        assertThat(json.parse(expected))
                .isEqualTo(new Drones(2,"Mario", "Garcia", "4DRC F11 PRO"));
-       assertThat(json.parseObject(expected).id()).isEqualTo(2);
-       assertThat(json.parseObject(expected).name()).isEqualTo("Mario");
-       assertThat(json.parseObject(expected).apellido()).isEqualTo("Garcia");
-       assertThat(json.parseObject(expected).DE()).isEqualTo("4DRC F11 PRO");
+       assertThat(json.parseObject(expected).getId()).isEqualTo(2);
+       assertThat(json.parseObject(expected).getName()).isEqualTo("Mario");
+       assertThat(json.parseObject(expected).getApellido()).isEqualTo("Garcia");
+       assertThat(json.parseObject(expected).getDE()).isEqualTo("4DRC F11 PRO");
     }
     @Test
     void internsListDeserializationTest() throws IOException {
