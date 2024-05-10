@@ -52,4 +52,9 @@ class DronesController {
 				pageable.getSortOr(Sort.by(Sort.Direction.ASC, "id"))));
 		return ResponseEntity.ok(page.getContent());
 	}
+	@PutMapping("/{requestedId}")
+	private ResponseEntity<Void> putDrones(@PathVariable Long requestedId, @RequestBody Drones dronesUpdate) {
+	    // just return 204 NO CONTENT for now.
+	    return ResponseEntity.noContent().build();
+	}
 }

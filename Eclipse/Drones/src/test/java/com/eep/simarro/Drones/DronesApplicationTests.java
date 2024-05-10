@@ -140,5 +140,15 @@ class DronesdApplicationTests {
         JSONArray DE = documentContext.read("$..DE");
         assertThat(DE).containsExactlyInAnyOrder("HOVERAir X1","H4DRC F11 PRO","CASC CH-92");
     }
-    
+    @Test
+    @DirtiesContext
+    void shouldUpdateAnExistingDrones() {
+    	Drones dronesUpdate = new Drones(99, "nombre", "apellido", "DE");
+
+        HttpEntity<Drones> request = new HttpEntity<>(dronesUpdate);
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/Drones/99", HttpMethod.PUT, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+    }
 }
+
