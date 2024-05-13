@@ -63,5 +63,4 @@ class DronesController {
 		DronesRepository.deleteById(id);
 		return ResponseEntity.noContent().build(); }
 	
-	
 }
