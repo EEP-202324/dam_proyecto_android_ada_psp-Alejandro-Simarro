@@ -1,15 +1,16 @@
 package com.example.proyectoandroid
 
+import androidx.compose.ui.tooling.preview.Preview
+
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.proyectoandroid.ui.theme.ProyectoAndroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,25 +23,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    // Aquí se muestra la interfaz de formulario de drones
+                    DronesFormulario(onGuardarClick = { /* Lógica para guardar el dron */ })
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ProyectoAndroidTheme {
-        Greeting("Android")
     }
 }
