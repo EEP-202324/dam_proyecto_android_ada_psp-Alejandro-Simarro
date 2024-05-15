@@ -15,10 +15,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.observeAsState
+
 
 @Composable
 fun Screen1(navController: NavController, viewModel: DronesViewModel) {
     val dronesList by viewModel.dronesList.observeAsState(emptyList())
+
 
     Column(
         modifier = Modifier
