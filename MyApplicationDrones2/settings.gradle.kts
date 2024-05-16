@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Application Drones Final"
+rootProject.name = "MyApplicationDrones"
 include(":app")
+ 

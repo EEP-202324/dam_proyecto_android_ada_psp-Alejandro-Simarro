@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplicationdronesfinal"
+    namespace = "com.example.myapplicationdrones"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplicationdronesfinal"
+        applicationId = "com.example.myapplicationdrones"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -73,4 +73,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 }
