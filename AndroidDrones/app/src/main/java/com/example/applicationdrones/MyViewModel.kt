@@ -2,30 +2,34 @@ package com.example.applicationdrones
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
-class MyViewModel : ViewModel() {
+class MyViewModel(private val service: DroneApiService) : ViewModel() {
 
-    // Ejecuta la función fetchData en un contexto de Kotlin Coroutine en un hilo secundario
-    fun fetchData() {
+    // Función para obtener la lista de drones
+    fun getDrones(onSuccess: (List<Drone>) -> Unit, onError: (String) -> Unit) {
         viewModelScope.launch {
             try {
                 val drones = service.getDrones()
-                // Aquí puedes manejar la lista de drones recibida
-                println("Lista de drones: $drones")
+                onSuccess(drones)
+            } catch (e: Exception) {
+                onError(e.message ?: "Error al obtener la lista de drones")
+            }
+        }
+    }
 
-                val newDrone = Drone(id = 1, name = "Nombre", apellido = "Apellido", de = "Origen")
-                val response = service.createDrone(newDrone)
+    // Función para crear un nuevo drone
+    fun createDrone(drone: Drone, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = service.createDrone(drone)
                 if (response.isSuccessful) {
-                    // El drone se creó exitosamente
-                    println("El drone se creó exitosamente")
+                    onSuccess()
                 } else {
-                    // Ocurrió un error al crear el drone
-                    println("Ocurrió un error al crear el drone: ${response.message()}")
+                    onError("Error al crear el drone: ${response.message()}")
                 }
             } catch (e: Exception) {
-                // Maneja el error aquí
-                println("Error en fetchData: ${e.message}")
+                onError(e.message ?: "Error al crear el drone")
             }
         }
     }
