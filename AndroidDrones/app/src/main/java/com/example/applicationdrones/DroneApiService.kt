@@ -9,16 +9,24 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface DroneApiService {
-    @GET("drones")
+    @GET("Drones")
     suspend fun getDrones(): List<Drone>
 
-    @POST("drones")
+    @POST("Drones")
     suspend fun createDrone(@Body drone: Drone): Response<Drone>
 }
 
 val retrofit = Retrofit.Builder()
-    .baseUrl("http://localhost:8080/")
+    .baseUrl("http://10.0.2.2:8080/")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 
-val service = retrofit.create(DroneApiService::class.java)
+object  ApiClient {
+    val service: DroneApiSevice by lazy {
+        retrofit.create(DroneApiSevice::class.java)
+    }
+}
+
+class DroneApiSevice {
+
+}

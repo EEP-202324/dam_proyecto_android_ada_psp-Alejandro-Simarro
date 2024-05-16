@@ -12,6 +12,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.applicationdrones.ui.theme.ApplicationDronesTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,60 +23,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ApplicationDronesTheme {
-                // Llama a la función App que define la interfaz de usuario
-                App()
+                val navController = rememberNavController()
+                NavHost(navController, startDestination = "droneScreen") {
+                    composable("droneScreen") {
+                        DroneScreen(navController)
+                    }
+                    composable("postForm") {
+                        PostForm(navController)
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
-fun App() {
-    DroneScreen()
-}
-
-@Composable
-fun PostForm(onSubmit: (String, String, String) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var apellido by remember { mutableStateOf("") }
-    var de by remember { mutableStateOf("") }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        TextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Nombre") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
-        )
-        TextField(
-            value = apellido,
-            onValueChange = { apellido = it },
-            label = { Text("Apellido") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
-        )
-        TextField(
-            value = de,
-            onValueChange = { de = it },
-            label = { Text("DE") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
-        )
-
-        Button(onClick = { onSubmit(name, apellido, de) }) {
-            Text(text = "Enviar")
-        }
-    }
-}
-
-@Composable
-fun DroneScreen() {
+fun DroneScreen(navController: NavHostController) {
     var showPostForm by remember { mutableStateOf(false) }
 
     Column(
@@ -86,8 +52,8 @@ fun DroneScreen() {
         }
 
         if (showPostForm) {
-            // Llama a la función para realizar la solicitud POST
-            myFunction()
+            // Muestra el formulario de envío
+            navController.navigate("postForm")
         } else {
             Button(onClick = { showPostForm = true }) {
                 Text(text = "Agregar drone")
@@ -97,7 +63,7 @@ fun DroneScreen() {
 }
 
 @Composable
-fun myFunction() {
+fun PostForm(navController: NavHostController) {
     var name by remember { mutableStateOf("") }
     var apellido by remember { mutableStateOf("") }
     var de by remember { mutableStateOf("") }
@@ -130,7 +96,14 @@ fun myFunction() {
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
         )
 
-        Button(onClick = { /* Llamar a la función para realizar la solicitud POST */ }) {
+        Button(onClick = {
+            // Aquí podrías realizar la lógica de enviar los datos
+            // Por ejemplo, llamar a una función que maneje la solicitud POST
+            // sendDroneData(name, apellido, de)
+
+            // Regresar a la pantalla anterior
+            navController.popBackStack()
+        }) {
             Text(text = "Enviar")
         }
     }
