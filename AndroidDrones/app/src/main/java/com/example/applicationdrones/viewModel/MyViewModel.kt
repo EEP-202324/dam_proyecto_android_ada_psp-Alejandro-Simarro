@@ -50,6 +50,42 @@ class MyViewModel : ViewModel() {
             }
         }
     }
+    // Función para obtener un dron por su ID
+    fun getDroneById(id: Int) {
+        viewModelScope.launch {
+            try {
+                val response = service.getDroneById(id)
+                if (response.isSuccessful) {
+                    // Manejar el dron obtenido
+                    val drone = response.body()
+                    // Por ejemplo, imprimir el dron obtenido
+                    drone?.let { Log.d("MyViewModel", "Drone obtenido: $it") }
+                } else {
+                    Log.e("MyViewModel", "Error al obtener el dron: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("MyViewModel", "Error al obtener el dron:", e)
+            }
+        }
+    }
+
+    // Función para eliminar un dron por su ID
+    fun deleteDroneById(id: Int) {
+        viewModelScope.launch {
+            try {
+                val response = service.deleteDroneById(id)
+                if (response.isSuccessful) {
+                    // Manejar la eliminación exitosa del dron
+                    Log.d("MyViewModel", "Dron eliminado exitosamente")
+                    // También podrías actualizar la lista de drones después de eliminar
+                } else {
+                    Log.e("MyViewModel", "Error al eliminar el dron: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("MyViewModel", "Error al eliminar el dron:", e)
+            }
+        }
+    }
 
 
 }
