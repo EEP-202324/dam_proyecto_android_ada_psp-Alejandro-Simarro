@@ -1,9 +1,11 @@
-package com.example.applicationdrones
+package com.example.applicationdrones.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.applicationdrones.ApiClient.service
+import androidx.navigation.NavHostController
+import com.example.applicationdrones.api.ApiClient.service
+import com.example.applicationdrones.model.Drone
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,13 +15,12 @@ class MyViewModel : ViewModel() {
     private val _drones = MutableStateFlow<List<Drone>>(emptyList())
     val drones: StateFlow<List<Drone>> = _drones.asStateFlow()
 
-    // Función para obtener la lista de drones
     fun getDrones() {
         viewModelScope.launch {
             try {
                 val response = service.getDrones()
                 if (response.isSuccessful) {
-                    _drones.value = response.body()!!
+                    _drones.value = response.body() ?: emptyList()
                     Log.d("UserViewModel", "Drones fetched: ${_drones.value}")
                 } else {
                     Log.e(
@@ -34,20 +35,21 @@ class MyViewModel : ViewModel() {
     }
 
     // Función para crear un nuevo drone
-    fun createDrone(drone: Drone, onSuccess: () -> Unit, onError: (String) -> Unit) {
+    fun createDrone(drone: Drone) {
         viewModelScope.launch {
             try {
                 val response = service.createDrone(drone)
                 if (response.isSuccessful) {
                     _drones.value += response.body()!!
-                    onSuccess()
+
                 } else {
-                    onError("Error: ${response.code()} ${response.message()}")
+                    Log.e("Error: ${response.code()} ${response.message()}", "" )
                 }
             } catch (e: Exception) {
                 Log.e("API Error", "Fallo de red: ${e.localizedMessage}", e)
-                onError("Fallo de red: ${e.localizedMessage}")
             }
         }
     }
+
+
 }

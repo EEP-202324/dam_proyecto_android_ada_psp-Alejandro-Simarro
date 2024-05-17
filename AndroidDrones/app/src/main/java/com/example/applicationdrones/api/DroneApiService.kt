@@ -1,6 +1,7 @@
-package com.example.applicationdrones
+package com.example.applicationdrones.api
 
 
+import com.example.applicationdrones.model.Drone
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
