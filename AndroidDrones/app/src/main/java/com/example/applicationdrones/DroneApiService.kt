@@ -9,10 +9,10 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface DroneApiService {
-    @GET("Drones")
-    suspend fun getDrones(): List<Drone>
+    @GET("drones")
+    suspend fun getDrones(): Response<List<Drone>>
 
-    @POST("Drones")
+    @POST("drones")
     suspend fun createDrone(@Body drone: Drone): Response<Drone>
 }
 
@@ -22,11 +22,8 @@ val retrofit = Retrofit.Builder()
     .build()
 
 object  ApiClient {
-    val service: DroneApiSevice by lazy {
-        retrofit.create(DroneApiSevice::class.java)
+    val service: DroneApiService by lazy {
+        retrofit.create(DroneApiService::class.java)
     }
 }
 
-class DroneApiSevice {
-
-}

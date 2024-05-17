@@ -1,19 +1,34 @@
 package com.example.applicationdrones
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.applicationdrones.ApiClient.service
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MyViewModel(private val service: DroneApiService) : ViewModel() {
+class MyViewModel : ViewModel() {
+    private val _drones = MutableStateFlow<List<Drone>>(emptyList())
+    val drones: StateFlow<List<Drone>> = _drones.asStateFlow()
 
     // Función para obtener la lista de drones
-    fun getDrones(onSuccess: (List<Drone>) -> Unit, onError: (String) -> Unit) {
+    fun getDrones() {
         viewModelScope.launch {
             try {
-                val drones = service.getDrones()
-                onSuccess(drones)
+                val response = service.getDrones()
+                if (response.isSuccessful) {
+                    _drones.value = response.body()!!
+                    Log.d("UserViewModel", "Drones fetched: ${_drones.value}")
+                } else {
+                    Log.e(
+                        "UserViewModel",
+                        "Error fetching drones: ${response.errorBody()?.string()}"
+                    )
+                }
             } catch (e: Exception) {
-                onError(e.message ?: "Error al obtener la lista de drones")
+                Log.e("UserViewModel", "Error fetching drones:", e)
             }
         }
     }
@@ -24,12 +39,14 @@ class MyViewModel(private val service: DroneApiService) : ViewModel() {
             try {
                 val response = service.createDrone(drone)
                 if (response.isSuccessful) {
+                    _drones.value += response.body()!!
                     onSuccess()
                 } else {
-                    onError("Error al crear el drone: ${response.message()}")
+                    onError("Error: ${response.code()} ${response.message()}")
                 }
             } catch (e: Exception) {
-                onError(e.message ?: "Error al crear el drone")
+                Log.e("API Error", "Fallo de red: ${e.localizedMessage}", e)
+                onError("Fallo de red: ${e.localizedMessage}")
             }
         }
     }
