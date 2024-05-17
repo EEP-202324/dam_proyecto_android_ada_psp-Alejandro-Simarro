@@ -10,49 +10,49 @@ public class Drones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String apellido;
+    private int precio;
+    private String color;
     private String DE;
 
     public Drones() {
     }
 
-    public Drones(Integer id, String name, String apellido, String DE) {
+    public Drones(Integer id, int precio, String color, String DE) {
         this.id = id;
-        this.name = name;
-        this.apellido = apellido;
+        this.precio = precio;
+        this.color = color;
         this.DE = DE;
     }
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public int getPrecio() {
+		return precio;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
 
-    public String getApellido() {
-        return apellido;
-    }
+	public String getColor() {
+		return color;
+	}
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+	public void setColor(String color) {
+		this.color = color;
+	}
 
-    public String getDE() {
-        return DE;
-    }
+	public String getDE() {
+		return DE;
+	}
 
-    public void setDE(String DE) {
-        this.DE = DE;
-    }
+	public void setDE(String dE) {
+		DE = dE;
+	}
 }

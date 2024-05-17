@@ -48,7 +48,7 @@ class DronesController {
 
 	@PutMapping("/{requestedId}")
 	private ResponseEntity<Drones> putDrones(@PathVariable Integer requestedId, @RequestBody Drones dronesUpdate) {
-		Drones updatedDrones = new Drones(requestedId, dronesUpdate.getName(), dronesUpdate.getApellido(),
+		Drones updatedDrones = new Drones(requestedId, dronesUpdate.getPrecio(), dronesUpdate.getColor(),
 				dronesUpdate.getDE());
 		DronesRepository.save(updatedDrones);
 		return ResponseEntity.ok(updatedDrones);
