@@ -27,32 +27,26 @@ fun HomeScreen(navController: NavHostController, viewModel: MyViewModel) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(32.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Alquilar drones",
+                text = "¡Bienvenido!",
                 style = MaterialTheme.typography.headlineLarge
             )
 
             Button(
                 onClick = { navController.navigate("Lista") },
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(72.dp)
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = "Ver Drones", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "Ver Drones")
             }
 
             Button(
                 onClick = { navController.navigate("Formulario") },
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(72.dp)
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = "Agregar Drone", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "Agregar Drone")
             }
         }
     }
