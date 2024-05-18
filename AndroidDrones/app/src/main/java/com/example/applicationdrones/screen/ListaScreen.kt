@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
@@ -37,6 +38,7 @@ fun ListaScreen(navController: NavHostController, viewModel: MyViewModel) {
     LazyColumn(
         modifier = Modifier.padding(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
+
     ) {
         items(drones) { drone ->
             DroneCard(drone, viewModel, navController)
@@ -88,6 +90,9 @@ fun DroneCard(drone: Drone, viewModel: MyViewModel, navController: NavHostContro
                         Text(text = "Color: ${drone.color}")
                         Text(text = "Modelo: ${drone.de}")
                     }
+                }
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Atrás")
                 }
             }
         }
