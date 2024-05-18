@@ -1,6 +1,6 @@
 {
-  "id": 1,
-  "name": "Paco",
-  "apellido": "Gonzalez",
-  "DE": "HOVERAir X1"
-}
+        "id": 1,
+        "precio": 1000,
+        "color": "negro",
+        "DE": "HOVERAir X1"
+    }

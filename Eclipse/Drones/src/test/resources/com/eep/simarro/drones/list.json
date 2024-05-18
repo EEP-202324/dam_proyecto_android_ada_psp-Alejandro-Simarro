@@ -1,20 +1,20 @@
 [
-   {
-      "id":1,
-      "name":"Paco",
-      "apellido":"Gonzalez",
-      "DE":"HOVERAir X1"
-   },
-   {
-      "id":2,
-      "name":"Mario",
-      "apellido":"Garcia",
-      "DE":"H4DRC F11 PRO"
-   },
-   {
-      "id":3,
-      "name":"Carlos",
-      "apellido":"Lopez",
-      "DE":"CASC CH-92"
-   }
+    {
+        "id": 1,
+        "precio": 1000,
+        "color": "negro",
+        "DE": "HOVERAir X1"
+    },
+    {
+        "id": 2,
+        "precio": 1500,
+        "color": "rojo",
+        "DE": "H4DRC F11 PRO"
+    },
+    {
+        "id": 3,
+        "precio": 2000,
+        "color": "azul",
+        "DE": "CASC CH-92"
+    }
 ]
