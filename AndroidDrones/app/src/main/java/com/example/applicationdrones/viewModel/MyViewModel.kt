@@ -3,7 +3,6 @@ package com.example.applicationdrones.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavHostController
 import com.example.applicationdrones.api.ApiClient.service
 import com.example.applicationdrones.model.Drone
 import kotlinx.coroutines.flow.MutableStateFlow

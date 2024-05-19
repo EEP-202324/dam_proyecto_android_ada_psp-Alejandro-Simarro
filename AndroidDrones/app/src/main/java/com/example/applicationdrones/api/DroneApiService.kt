@@ -1,6 +1,5 @@
 package com.example.applicationdrones.api
 
-
 import com.example.applicationdrones.model.Drone
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -37,4 +36,3 @@ object  ApiClient {
         retrofit.create(DroneApiService::class.java)
     }
 }
-
